@@ -1,0 +1,13 @@
+POST https://localhost:7152/order
+Content-Type: application/json
+
+{
+  "brand": "Nike",
+  "variant": "AirMax",
+  "netContent": "1L",
+  "orderNeed": "Restock",
+  "fileLinks": [
+    "https://raw.githubusercontent.com/github/gitignore/main/README.md",
+    "https://example.com/this-file-does-not-exist"
+  ]
+}

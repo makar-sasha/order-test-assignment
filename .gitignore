@@ -1,0 +1,67 @@
+# Ignore build output
+bin/
+obj/
+
+# Ignore Rider-specific files and folders
+.idea/
+*.iml
+/.idea_modules/
+riderModule.iml
+/_ReSharper.Caches/
+.sln.iml
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+
+# Ignore package-related files
+/packages/
+/*.nupkg
+/*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.VSIX
+
+# Ignore logs and generated files
+*.log
+*.tlog
+*.cache
+*.csproj.user
+*.mstest
+
+# Ignore build and publish artifacts
+*.publish.xml
+.publish/
+wwwroot/
+dist/
+node_modules/
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.~*
+*.swp
+*.DS_Store
+
+# Ignore generated code or metadata
+*.generated.cs
+*.designer.cs
+
+# Ignore secrets and keys
+appsettings.json
+appsettings.*.json
+*.key
+*.pfx
+
+# Ignore Azure-related files
+azure-pipelines.yml
+*.azure.*bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+*.DotSettings
