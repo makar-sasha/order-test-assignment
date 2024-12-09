@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MiniValidation;
 using Order.Core.Messaging;
 using Order.Core.Orders;
 using Polly.Wrap;
@@ -17,6 +18,13 @@ public static class OrderEndpoints
             ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            if (!MiniValidator.TryValidate(order, out var errors))
+            {
+                var errorDetails = string.Join("; ", errors.Select(e => $"{e.Key}: {string.Join(", ", e.Value)}"));
+                logger.LogWarning("Validation failed for Order: {ValidationErrors}", errorDetails);
+                return Results.BadRequest(new { error = "Validation failed.", details = errors });
+            }
+            
             logger.LogInformation("Received order: {@Order}", order);
             var orderId = await orderRepository.Add(order, cancellationToken);
             logger.LogInformation("Order successfully saved with ID: {OrderId}", orderId);

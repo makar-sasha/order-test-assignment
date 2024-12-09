@@ -80,7 +80,6 @@ app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
     {
-        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Response.ContentType = "application/json";
 
         var exceptionHandlerPathFeature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
@@ -91,12 +90,9 @@ app.UseExceptionHandler(errorApp =>
         {
             logger.LogError(exception, "Unhandled exception occurred while processing request {RequestPath}.", context.Request.Path);
         }
-        else
-        {
-            logger.LogError("An unhandled exception occurred while processing request {RequestPath}.", context.Request.Path);
-        }
 
-        var errorResponse = new { error = "Service is temporarily unavailable. Please retry later." };
+        var errorResponse = new { error = "An unexpected error occurred. Please try again later." };
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         await context.Response.WriteAsJsonAsync(errorResponse);
     });
 });
